@@ -13,11 +13,11 @@ class ArtificialPancreasSystem:
 
     def meal(self, carbs: float):
         """Simulate a meal event (input feature: carbs)."""
-        self.glucose_level += carbs * GLUCOSE_PER_CARB
+        self.glucose_level += carbs * self.GLUCOSE_PER_CARB
         
     def exercise(self, duration: float):
         """Simulate physical activity (input feature: duration)."""
-        self.glucose_level -= duration * GLUCOSE_BURN_PER_MIN
+        self.glucose_level -= duration * self.GLUCOSE_BURN_PER_MIN
 
     def deliver_insulin(self, units: float):
         """Simulate insulin delivery (input feature: units)."""
@@ -30,7 +30,7 @@ class ArtificialPancreasSystem:
         return "Warning: Critically low glucose level!"
     
     def carb_intake_needed(self):
-        return (self.target_glucose - self.glucose_level) / GLUCOSE_PER_CARB
+        return (self.target_glucose - self.glucose_level) / self.GLUCOSE_PER_CARB
     
     def suggest_carb_intake(self):
         return f"Suggestion: Consume {carb_intake_needed()}carbs to raise glucose level."
