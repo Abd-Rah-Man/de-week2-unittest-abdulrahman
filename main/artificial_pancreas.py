@@ -21,7 +21,10 @@ class ArtificialPancreasSystem:
 
     def deliver_insulin(self, units: float):
         """Simulate insulin delivery (input feature: units)."""
-        self.glucose_level -= units * self.insulin_sensitivity
+        if self.glucose_level <= 50:
+            pass
+        else:
+            self.glucose_level -= units * self.insulin_sensitivity
 
     def warn_low_glucose(self):        
         return "Warning: Critically low glucose level!"
@@ -30,7 +33,7 @@ class ArtificialPancreasSystem:
         return (self.target_glucose - self.glucose_level) / GLUCOSE_PER_CARB
     
     def suggest_carb_intake(self):
-        return f"Suggestion: Consume {car}carbohydrates to raise glucose level."
+        return f"Suggestion: Consume {carb_intake_needed()}carbs to raise glucose level."
             
     def maintain_glucose(self):
         return "Maintian: Glucose level is stable."
@@ -50,8 +53,8 @@ class ArtificialPancreasSystem:
             carb_intake_needed = self.carb_intake_needed()
             # Low glucose - warn and suggest carbohydrate intake
             self.meal(carb_intake_needed)
-            return (f"{self.warn_low_glucose()}.\n{self.suggest_carb_intake()}")
+            return (f"{self.warn_low_glucose()}.\n{self.suggest_carb_intake()}", f"New glucose level:{self.glucose_level}")
         else:
             # Stable glucose
-            print(self.maintain_glucose())
+            return(self.maintain_glucose(), f"Current glucose level:{self.glucose_level}")
         
